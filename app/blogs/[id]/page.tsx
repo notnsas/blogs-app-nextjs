@@ -5,21 +5,21 @@ import { handleLike } from "@/app/actions/blogs"
 
 const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
-  const note = getBlogById(Number(id))
+  const blog = await getBlogById(Number(id))
 
-  if (!note) {
+  if (!blog) {
     notFound()
   }
 
   return (
     <div>
-      <h2>{note.title}</h2>
-      <p>{note.author}</p>
-      <p>{note.url}</p>
-      <p>Likes: {note.likes}</p>
+      <h2>{blog.title}</h2>
+      <p>{blog.author}</p>
+      <p>{blog.url}</p>
+      <p>Likes: {blog.likes}</p>
       <form action={handleLike}>
       {/* <form> */}
-        <input type="hidden" name="id" value={note.id} />
+        <input type="hidden" name="id" value={blog.id} />
         <button type="submit">
           Add Like
         </button>
