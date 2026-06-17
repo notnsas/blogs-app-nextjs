@@ -22,6 +22,48 @@
       "when": 1780856050649,
       "tag": "0002_clever_sunfire",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1780860581473,
+      "tag": "0003_amazing_stellaris",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780860626408,
+      "tag": "0004_previous_rocket_raccoon",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1780860721718,
+      "tag": "0005_happy_carnage",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1780863955977,
+      "tag": "0006_ordinary_norman_osborn",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1780911846253,
+      "tag": "0007_fast_the_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1780913333043,
+      "tag": "0008_brown_dark_beast",
+      "breakpoints": true
     }
   ]
 }
