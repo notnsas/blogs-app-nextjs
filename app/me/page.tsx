@@ -1,7 +1,5 @@
-// "use server"
-
 import { auth } from "@/auth"
-import { redirect } from "next/dist/client/components/navigation"
+import { redirect } from "next/navigation"
 import { createToken } from "../actions/users"
 import { getUserWithReadingLists } from "../services/users"
 import { handleMarkAsRead } from "../actions/readingLists"
@@ -23,10 +21,6 @@ const Me = async () => {
 
   const readBlogs = currentUser.readingLists.filter(item => item.read)
   const unreadBlogs = currentUser.readingLists.filter(item => !item.read)
-
-  console.log("currentUser", currentUser)
-  console.log("readingLists", currentUser.readingLists)
-  console.log("unreadBlogs", unreadBlogs)
 
   return (
     <div className="max-w-4xl mx-auto p-6" data-testid="user-profile">
@@ -158,9 +152,9 @@ const Me = async () => {
           </h2>
 
           <div className="bg-black/30 border border-gray-700 rounded-lg p-4 overflow-x-auto">
-            <p className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
-              {currentUser.token ? <p data-testid="api-token">{currentUser.token}</p> : <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>}
-            </p>
+            <div className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
+              {currentUser.token ? <span data-testid="api-token">{currentUser.token}</span> : <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>}
+            </div>
           </div>
 
           <form action={createToken} className="mt-4">
