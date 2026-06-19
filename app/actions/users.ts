@@ -7,7 +7,7 @@ import { users } from "@/db/schema"
 import { getUserWithUsername } from "../services/users"
 import { getCurrentUser } from "../services/session"
 import { eq } from "drizzle-orm/sql/expressions/conditions"
-import { revalidatePath } from "next/dist/server/web/spec-extension/revalidate"
+import { revalidatePath } from "next/cache"
 
 export const registerUser = async (
   prevState: { error: string },
