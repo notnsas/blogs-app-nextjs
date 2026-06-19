@@ -1,11 +1,10 @@
-// "use server"
-
 import { auth } from "@/auth"
-import { redirect } from "next/dist/client/components/navigation"
+import { redirect } from "next/navigation"
 import { createToken } from "../actions/users"
 import { getUserWithReadingLists } from "../services/users"
 import { handleMarkAsRead } from "../actions/readingLists"
 
+// This forces Next.js to ALWAYS hit the database and never cache the HTML
 export const dynamic = "force-dynamic"
 
 const Me = async () => {
@@ -15,18 +14,21 @@ const Me = async () => {
     redirect("/login")
   }
 
+  // Fetching the absolute newest data directly from the DB
   const currentUser = await getUserWithReadingLists(session.user.email)
 
   if (!currentUser) {
     redirect("/login")
   }
 
+  // --- ADDED LOGS HERE AS REQUESTED ---
+  console.log("=== DB FETCH COMPLETE ===")
+  console.log("Current User fetched:", currentUser.username)
+  console.log("Fresh Token from DB:", currentUser.token)
+  console.log("=========================")
+
   const readBlogs = currentUser.readingLists.filter(item => item.read)
   const unreadBlogs = currentUser.readingLists.filter(item => !item.read)
-
-  console.log("currentUser", currentUser)
-  console.log("readingLists", currentUser.readingLists)
-  console.log("unreadBlogs", unreadBlogs)
 
   return (
     <div className="max-w-4xl mx-auto p-6" data-testid="user-profile">
@@ -158,9 +160,14 @@ const Me = async () => {
           </h2>
 
           <div className="bg-black/30 border border-gray-700 rounded-lg p-4 overflow-x-auto">
-            <p className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
-              {currentUser.token ? <p data-testid="api-token">{currentUser.token}</p> : <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>}
-            </p>
+            {/* ✅ FIXED HYDRATION ERROR: Replaced <p> with <div> and <span> */}
+            <div className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
+              {currentUser.token ? (
+                <span data-testid="api-token">{currentUser.token}</span>
+              ) : (
+                <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>
+              )}
+            </div>
           </div>
 
           <form action={createToken} className="mt-4">
