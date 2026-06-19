@@ -1,10 +1,12 @@
-"use server"
+// "use server"
 
 import { auth } from "@/auth"
 import { redirect } from "next/dist/client/components/navigation"
 import { createToken } from "../actions/users"
 import { getUserWithReadingLists } from "../services/users"
 import { handleMarkAsRead } from "../actions/readingLists"
+
+export const dynamic = "force-dynamic"
 
 const Me = async () => {
   const session = await auth()
@@ -22,8 +24,12 @@ const Me = async () => {
   const readBlogs = currentUser.readingLists.filter(item => item.read)
   const unreadBlogs = currentUser.readingLists.filter(item => !item.read)
 
+  console.log("currentUser", currentUser)
+  console.log("readingLists", currentUser.readingLists)
+  console.log("unreadBlogs", unreadBlogs)
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6" data-testid="user-profile">
       <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-6 space-y-8">
         <h1 className="text-3xl font-bold text-white">
           My Profile
@@ -32,33 +38,41 @@ const Me = async () => {
         <div className="space-y-3">
           <div className="bg-gray-800/50 rounded-lg p-4">
             <p className="text-sm text-gray-400">Name</p>
-            <p className="text-white font-medium">
+            <p data-testid="user-name" className="text-white font-medium">
               {currentUser.name}
             </p>
           </div>
 
           <div className="bg-gray-800/50 rounded-lg p-4">
             <p className="text-sm text-gray-400">Username</p>
-            <p className="text-white font-medium">
+            <p data-testid="user-username" className="text-white font-medium">
               {currentUser.username}
             </p>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-6">
+        <div className="border-t border-gray-800 pt-6" data-testid="reading-list-section">
           <h2 className="text-2xl font-semibold text-white mb-4">
             Reading Lists
           </h2>
 
+          {unreadBlogs.length === 0 && readBlogs.length === 0 ? (
+            <div data-testid="empty-reading-list" className="bg-gray-800/50 rounded-lg p-4">
+              <p className="text-gray-400">
+                Your reading list is empty
+              </p>
+            </div>
+          ) : null}
+
           <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-semibold text-red-400 mb-3">
+            <div data-testid="unread-section">
+              <h3 data-testid="unread-blogs-title" className="text-lg font-semibold text-red-400 mb-3">
                 Unread ({unreadBlogs.length})
               </h3>
 
               <div className="space-y-3">
                 {unreadBlogs.length === 0 ? (
-                  <div className="bg-gray-800/50 rounded-lg p-4">
+                  <div className="bg-gray-800/50 rounded-lg p-4" data-testid="no-unread-blogs">
                     <p className="text-gray-400">
                       No unread blogs
                     </p>
@@ -89,6 +103,7 @@ const Me = async () => {
 
                         <button
                           type="submit"
+                          data-testid="mark-read-button"
                           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-all"
                         >
                           Mark as Read
@@ -101,14 +116,14 @@ const Me = async () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-green-400 mb-3">
+              <h3 data-testid="read-blogs-title" className="text-lg font-semibold text-green-400 mb-3">
                 Read ({readBlogs.length})
               </h3>
 
               <div className="space-y-3">
                 {readBlogs.length === 0 ? (
                   <div className="bg-gray-800/50 rounded-lg p-4">
-                    <p className="text-gray-400">
+                    <p data-testid="no-read-blogs" className="text-gray-400">
                       No completed blogs
                     </p>
                   </div>
@@ -137,20 +152,21 @@ const Me = async () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-6">
+        <div className="border-t border-gray-800 pt-6" data-testid="api-token-section">
           <h2 className="text-xl font-semibold text-white mb-3">
             API Token
           </h2>
 
           <div className="bg-black/30 border border-gray-700 rounded-lg p-4 overflow-x-auto">
-            <p className="text-green-400 font-mono text-sm break-all">
-              {currentUser.token}
+            <p className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
+              {currentUser.token ? <p data-testid="api-token">{currentUser.token}</p> : <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>}
             </p>
           </div>
 
           <form action={createToken} className="mt-4">
             <button
               type="submit"
+              data-testid="generate-token-button"
               className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-500 transition-all"
             >
               Generate New Token

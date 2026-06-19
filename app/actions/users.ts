@@ -34,8 +34,10 @@ export const registerUser = async (
   }
 
   const passwordHash = await bcrypt.hash(password, 10)
-
+  console.log("passwordHash:", passwordHash)
   await db.insert(users).values({ username, name, passwordHash })
+  console.log("User registered:", passwordHash)
+  revalidatePath("/users")
 
   return { error: "", success: true, values: { username, name, password, passwordConfirm } }
 }

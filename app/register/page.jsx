@@ -30,6 +30,9 @@ export default function RegisterPage() {
       <form action={formAction}>
         <div>
           {/* {state.error && <p style={{ color: "red" }}>{state.error}</p>} */}
+          {state.values?.passwordConfirm && (
+            <p data-testid="passwordConfirm-error">Passwords do not match</p>
+          )}
           <label>
             Username
             <input type="text" name="username" defaultValue={state.values?.username} required />
@@ -53,7 +56,9 @@ export default function RegisterPage() {
             <input type="password" name="passwordConfirm" defaultValue={state.values?.passwordConfirm} required />
           </label>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" data-testid="register-button">
+          Register
+        </button>
       </form>
     </div>
   )

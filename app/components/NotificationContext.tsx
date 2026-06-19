@@ -7,12 +7,14 @@ type NotificationType = "success" | "error"
 type NotificationContextType = {
   message: string
   type: NotificationType
-  showNotification: (message: string, type?: NotificationType) => void
+  dataTestId: string
+  showNotification: (message: string, type?: NotificationType, dataTestId?: string) => void
 }
 
 const NotificationContext = createContext<NotificationContextType>({
   message: "",
   type: "success",
+  dataTestId: "",
   showNotification: () => {},
 })
 
@@ -23,18 +25,20 @@ export const NotificationProvider = ({
 }) => {
   const [message, setMessage] = useState("")
   const [type, setType] = useState<NotificationType>("success")
-
+  const [dataTestId, setDataTestId] = useState<string>("")
   const showNotification = (
     msg: string,
     notifType: NotificationType = "success",
+    dataTestId: string = ""
   ) => {
     setMessage(msg)
     setType(notifType)
+    setDataTestId(dataTestId)
     setTimeout(() => setMessage(""), 5000)
   }
 
   return (
-    <NotificationContext value={{ message, type, showNotification }}>
+    <NotificationContext value={{ message, type, dataTestId, showNotification }}>
       {children}
     </NotificationContext>
   )

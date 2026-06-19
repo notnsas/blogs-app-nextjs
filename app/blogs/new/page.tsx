@@ -34,43 +34,48 @@ const NewBlog = () => {
         <form action={formAction} className="space-y-4">
           {/* Title */}
           <div>
-            <label className="text-sm text-gray-300">Title</label>
-            <input
+            <label className="text-sm text-gray-300">Title
+              <input
               type="text"
               name="title"
               defaultValue={state.values?.title}
               required
               className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-green-500 outline-none"
             />
+            </label>
+            
           </div>
 
           {/* Author */}
           <div>
-            <label className="text-sm text-gray-300">Author</label>
-            <input
+            <label className="text-sm text-gray-300">Author
+              <input
               type="text"
               name="author"
               defaultValue={state.values?.author}
               required
               className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-green-500 outline-none"
             />
+            </label>
+            
           </div>
 
           {/* URL */}
           <div>
-            <label className="text-sm text-gray-300">URL</label>
-            <input
+            <label className="text-sm text-gray-300">URL<input
               type="url"
               name="url"
               defaultValue={state.values?.url}
               required
               className="w-full mt-1 p-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:border-green-500 outline-none"
-            />
+            /></label>
+            
           </div>
 
           {/* Button */}
           <button
             type="submit"
+            data-testid="create-blog-button"
             className="w-full py-2 rounded-md bg-green-600 text-white hover:bg-green-500 transition-all"
           >
             Create

@@ -2,24 +2,25 @@
 
 import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
-
+import { useRouter } from "next/navigation"
 export default function NavBar() {
   const { data: session } = useSession()
+  const router = useRouter()
 
   return (
     <nav className="flex items-center justify-between px-6 py-3 bg-gray-900 text-white shadow-md">
       {/* Left side */}
       <div className="flex items-center gap-4 text-sm">
         <Link className="hover:text-blue-400 transition" href="/">
-          Home
+          home
         </Link>
 
         <Link className="hover:text-blue-400 transition" href="/blogs">
-          Blogs
+          blogs
         </Link>
 
         <Link className="hover:text-blue-400 transition" href="/users">
-          Users
+          users
         </Link>
 
         {session && (
@@ -34,7 +35,7 @@ export default function NavBar() {
             className="hover:text-blue-400 transition"
             href="/me"
           >
-            My Profile
+            me
           </Link>
           </>
         )}
@@ -49,20 +50,25 @@ export default function NavBar() {
             </span>
 
             <button
-              onClick={() => signOut()}
+              onClick={async () => {
+                // await signOut({
+                //   callbackUrl: "/login",
+                // })
+                await signOut()
+              }}
               className="px-3 py-1 rounded-md bg-red-600 hover:bg-red-500 transition"
             >
-              Logout
+              logout
             </button>
           </>
         ) : (
           <>
             <Link className="hover:text-blue-400 transition" href="/login">
-              Login
+              login
             </Link>
 
             <Link className="hover:text-blue-400 transition" href="/register">
-              Register
+              register
             </Link>
           </>
         )}

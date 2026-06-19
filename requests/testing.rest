@@ -1,0 +1,12 @@
+
+DELETE  http://localhost:3000/api/testing/reset
+# Authorization: Bearer d1c9afd8-6fb2-4263-b10e-0c6375a9a3d9
+###
+POST  http://localhost:3000/api/testing/users
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "name": "Test User",
+  "password": "testpass123"
+}

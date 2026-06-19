@@ -15,8 +15,9 @@ export default function Notification() {
     backgroundColor: type === "success" ? "#16a34a" : "#dc2626",
   }
 
+  const dataTestId = type === "success" ? "notification" : "username-error" 
   return (
-    <div className={`p-4 rounded-xl shadow-lg text-white border backdrop-blur-md transition-all duration-200
+    <div data-testid={dataTestId} className={`p-4 rounded-xl shadow-lg text-white border backdrop-blur-md transition-all duration-200
       ${
         type === "success"
           ? "bg-green-500/80 border-green-400/30"

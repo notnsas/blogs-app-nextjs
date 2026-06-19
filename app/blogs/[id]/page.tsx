@@ -16,16 +16,17 @@ const NotePage = async ({
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-6">
+    <div className="max-w-2xl mx-auto p-6 space-y-6" data-testid="blog-detail">
       {/* Card */}
       <div className="p-6 rounded-xl bg-gray-900 border border-gray-800 shadow-lg">
-        <h2 className="text-2xl font-bold text-white">{blog.title}</h2>
+        <h2 data-testid="blog-title" className="text-2xl font-bold text-white">{blog.title}</h2>
 
-        <p className="text-gray-400 mt-2">{blog.author}</p>
+        <p data-testid="blog-author" className="text-gray-400 mt-2">{blog.author}</p>
 
         <a
           href={blog.url}
           target="_blank"
+          data-testid="blog-url"
           className="text-blue-400 hover:underline break-all"
         >
           {blog.url}
@@ -41,6 +42,7 @@ const NotePage = async ({
 
           <button
             type="submit"
+            data-testid="like-button"
             className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-500 transition-all"
           >
             Add Like
@@ -51,7 +53,9 @@ const NotePage = async ({
           <input type="hidden" name="blogId" value={blog.id} />
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500 transition-all"
+            className="px-4 py-2 rounded-lg bg-blue-600 
+            text-white hover:bg-blue-500 transition-all"
+            data-testid="add-to-reading-list-button"
           >
             Add to Reading List
           </button>
