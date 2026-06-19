@@ -48,10 +48,10 @@ jobs:
           fi
 
       - name: Run database migrations
-        run: npx drizzle-kit push
+        run: NODE_ENV=test npx drizzle-kit push
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: NODE_ENV=test npx playwright test
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
