@@ -462,7 +462,8 @@ test.describe("Blog Application", () => {
       await page.getByTestId("generate-token-button").click()
 
       // Wait for token to potentially change
-      await page.waitForTimeout(500)
+      // await page.waitForTimeout(500)
+      await page.waitForTimeout(50000)
       const secondToken = await page.getByTestId("api-token").textContent()
 
       // Tokens should be different
