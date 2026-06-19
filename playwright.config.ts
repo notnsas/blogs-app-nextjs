@@ -1,6 +1,10 @@
 import { defineConfig } from "@playwright/test"
 
 export default defineConfig({
+  reporter: [
+    ["html"],
+    ["list"]
+  ],
   testDir: "./tests",
 
   use: {
