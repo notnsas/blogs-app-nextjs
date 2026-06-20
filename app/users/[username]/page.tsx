@@ -6,6 +6,10 @@ const UserPage = async ({ params }: { params: Promise<{ username: string }> }) =
   const { username } = await params
   const user = await getUserWithUsername(username)
 
+  if (!user) {
+    notFound()
+  }
+
   return (
     <div>
       <h2>{user.name}</h2>
@@ -15,7 +19,7 @@ const UserPage = async ({ params }: { params: Promise<{ username: string }> }) =
         {user.blogs.map((blog) => (
           <li key={blog.id}>
             <Link href={`/blogs/${blog.id}`}>{blog.title}</Link>
-            <p>{blog.content}</p>
+            {/* <p>{blog.content}</p> */}
           </li>
         ))}
       </ul>
