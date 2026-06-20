@@ -54,7 +54,7 @@ export const createToken = async () => {
   // console.log('current token:', token)
   // console.log('current user:', currentUser)
   // console.log('users.username:', users.username)
-  db.update(users)
+  await db.update(users)
     .set({ token: token })  
     .where(eq(users.username, currentUser.username))
 
