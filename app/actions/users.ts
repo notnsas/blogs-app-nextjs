@@ -42,21 +42,21 @@ export const registerUser = async (
   return { error: "", success: true, values: { username, name, password, passwordConfirm } }
 }
 
-export const createToken = async (username: string) => {
+export const createToken = async () => {
   const token = crypto.randomUUID()
   
-  // const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser()
 
-  // if (!currentUser) {
-  //   revalidatePath("/login")
-  //   return
-  // }
+  if (!currentUser) {
+    revalidatePath("/login")
+    return
+  }
   // console.log('current token:', token)
   // console.log('current user:', currentUser)
   // console.log('users.username:', users.username)
   await db.update(users)
     .set({ token: token })  
-    .where(eq(users.username, username))
+    .where(eq(users.username, currentUser.username))
 
   revalidatePath("/me")
   return

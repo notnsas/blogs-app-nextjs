@@ -163,7 +163,7 @@ const Me = async () => {
             </div>
           </div>
 
-          <form action={() => createToken(currentUser.username)} className="mt-4">
+          <form action={createToken} className="mt-4">
             <button
               type="submit"
               data-testid="generate-token-button"
