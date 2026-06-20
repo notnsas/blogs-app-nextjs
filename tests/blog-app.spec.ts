@@ -463,7 +463,7 @@ test.describe("Blog Application", () => {
 
       // Wait for token to potentially change
       // await page.waitForTimeout(500)
-      await page.waitForTimeout(50000)
+      await page.waitForTimeout(20000)
       const secondToken = await page.getByTestId("api-token").textContent()
 
       // Tokens should be different

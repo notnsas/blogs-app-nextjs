@@ -42,7 +42,7 @@ export const registerUser = async (
   return { error: "", success: true, values: { username, name, password, passwordConfirm } }
 }
 
-export const createToken = async (formData: FormData) => {
+export const createToken = async () => {
   const token = crypto.randomUUID()
   
   const currentUser = await getCurrentUser()
@@ -51,6 +51,7 @@ export const createToken = async (formData: FormData) => {
     revalidatePath("/login")
     return
   }
+  console.log('current token:', token)
   console.log('current user:', currentUser)
   console.log('users.username:', users.username)
   await db.update(users)
