@@ -45,12 +45,12 @@ export const registerUser = async (
 export const createToken = async () => {
   const token = crypto.randomUUID()
   
-  const currentUser = await getCurrentUser()
+  // const currentUser = await getCurrentUser()
 
-  if (!currentUser) {
-    revalidatePath("/login")
-    return
-  }
+  // if (!currentUser) {
+  //   revalidatePath("/login")
+  //   return
+  // }
   // console.log('current token:', token)
   // console.log('current user:', currentUser)
   // console.log('users.username:', users.username)
