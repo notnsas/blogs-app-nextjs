@@ -58,7 +58,7 @@ export const createToken = async (username: string) => {
     .set({ token: token })  
     .where(eq(users.username, username))
 
-  // revalidatePath("/me")
+  revalidatePath("/me")
   return
 }
   
