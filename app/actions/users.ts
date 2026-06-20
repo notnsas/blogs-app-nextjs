@@ -51,14 +51,14 @@ export const createToken = async () => {
     revalidatePath("/login")
     return
   }
-  console.log('current token:', token)
-  console.log('current user:', currentUser)
-  console.log('users.username:', users.username)
+  // console.log('current token:', token)
+  // console.log('current user:', currentUser)
+  // console.log('users.username:', users.username)
   await db.update(users)
     .set({ token: token })  
     .where(eq(users.username, currentUser.username))
 
-  revalidatePath("/me")
+  // revalidatePath("/me")
   return
 }
   
