@@ -158,9 +158,9 @@ const Me = async () => {
           </h2>
 
           <div className="bg-black/30 border border-gray-700 rounded-lg p-4 overflow-x-auto">
-            <p className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
+            <div className="text-green-400 font-mono text-sm break-all" data-testid="token-display">
               {currentUser.token ? <p data-testid="api-token">{currentUser.token}</p> : <span data-testid="no-token-message" className="text-gray-400">No token generated yet</span>}
-            </p>
+            </div>
           </div>
 
           <form action={createToken} className="mt-4">
